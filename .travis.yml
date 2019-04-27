@@ -1,4 +1,4 @@
-language: node_js
+language:          node_js
 node_js:
     - "10"
 install:
@@ -13,20 +13,22 @@ notifications:
   slack:
       rooms:
         - disruptivesworkspace:KDQt8YJkLtzeVLzS0I23eo3y#tasky
-      on_success: always
-      on_failure: always
+      on_success:  always
+      on_failure:  always
       template:
-      - "Test"
+      - "Yay another version is available <https://yahart.github.io/tasky/|here> :smile:"
+      - "%{repository_slug} (%{commit}) : %{message}"
+      - "Build details: %{build_url}"
   email:
     recipients:
       - hutteryannick@gmail.com
-    on_success: always
-    on_failure: always
+    on_success:    always
+    on_failure:    always
 
 deploy:
-  provider: pages
-  skip_cleanup: true
-  github_token: $GITHUB_TOKEN
-  keep_history: true
+  provider:        pages
+  skip_cleanup:    true
+  github_token:    $GITHUB_TOKEN
+  keep_history:    true
   on:
-    branch: master
+    branch:        master
