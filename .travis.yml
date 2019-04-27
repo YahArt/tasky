@@ -4,6 +4,7 @@ node_js:
 install:
     - npm install
 script:
+    - rm -rf node_modules/mdbootstrap/.git/
     - npm run build-all-libs
 cache:
     directories:
