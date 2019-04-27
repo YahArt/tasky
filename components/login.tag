@@ -1,14 +1,36 @@
 <login>
-  <!-- Start your project here-->
-  <div style="height: 100vh">
-    <div class="flex-center flex-column">
+  <div class="container login">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title text-center">Login</h4>
+        <form>
+          <!-- Material input -->
+          <div class="md-form mt-5 form-lg">
+            <input type="text" class="form-control" id="user-name">
+            <label for="user-name">Benutzername</label>
+          </div>
+          <!-- Material input -->
+          <div class="md-form mt-5 form-lg">
+            <input type="password" class="form-control" id="user-password">
+            <label for="user-password">Passwort</label>
+          </div>
 
-      <h1 class="text-hide animated fadeIn mb-4"
-        style="background-image: url('https://mdbootstrap.com/img/logo/mdb-transparent-250px.png'); width: 250px; height: 90px;">
-        MDBootstrap</h1>
-      <h5 class="animated fadeIn mb-3">Thank you for using our product. We're glad you're with us.</h5>
+          <button type="button" class="btn btn-primary login-button">Login</button>
 
-      <p class="animated fadeIn text-muted">MDB Team</p>
+        </form>
+      </div>
     </div>
   </div>
+
+  <style>
+    .login {
+      margin: 10% auto;
+    }
+
+    .login-button {
+      display: block;
+      margin: 0 auto;
+    }
+  </style>
+
 </login>
