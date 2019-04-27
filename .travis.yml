@@ -12,7 +12,7 @@ cache:
 notifications:
   slack:
       rooms:
-        - disruptivesworkspace:KDQt8YJkLtzeVLzS0I23eo3y#tasky
+        - disruptivesworkspace:KDQt8YJkLtzeVLzS0I23eo3y
       on_success:  always
       on_failure:  always
       template:
