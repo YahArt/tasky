@@ -2,7 +2,7 @@ language: node_js
 node_js:
     - "10"
 install:
-    - npm install -g uglifycss uglifyjs
+    - npm install -g uglifycss uglify-js
 script:
     - npm run build-all-libs
 cache:
