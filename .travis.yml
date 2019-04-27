@@ -13,8 +13,6 @@ notifications:
   email:
     recipients:
       - hutteryannick@gmail.com
-    template:
-      - "This is a custom text"
     on_success: always
     on_failure: always
 
