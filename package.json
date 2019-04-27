@@ -4,7 +4,11 @@
   "description": "Yet another but refreshing todo app with gamification",
   "main": "main.js",
   "scripts": {
-    "start": "concurrently --kill-others \"riot --type coffee -w app/components components\" \"browser-sync start --server --files '**/*.html, **/*.css, **/*.js' --no-notify\""
+    "build-js-libs": "uglifyjs node_modules/mdbootstrap/js/jquery-3.3.1.min.js node_modules/mdbootstrap/js/popper.min.js node_modules/mdbootstrap/js/bootstrap.min.js node_modules/mdbootstrap/js/mdb.min.js node_modules/riot/riot.min.js -o js/libs.js",
+    "build-css-libs": "uglifycss node_modules/mdbootstrap/css/bootstrap.min.css node_modules/mdbootstrap/css/mdb.min.css > css/libs.css",
+    "build-all-libs": "npm run build-js-libs & npm run build-css-libs",
+    "watch": "concurrently --kill-others \"riot --type coffee -w components js\" \"browser-sync start --server --files '**/*.html, **/*.css, **/*.js' --no-notify\"",
+    "start": "npm run build-all-libs & npm run watch"
   },
   "repository": {
     "type": "git",
@@ -22,7 +26,10 @@
     "riot": "^3.13.2"
   },
   "devDependencies": {
+    "browser-sync": "^2.26.5",
     "coffeescript": "^2.4.1",
-    "concurrently": "^4.1.0"
+    "concurrently": "^4.1.0",
+    "uglify-js": "^3.5.9",
+    "uglifycss": "0.0.29"
   }
 }
