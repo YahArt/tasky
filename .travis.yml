@@ -1,6 +1,11 @@
 language: node_js
 node_js:
     - "10"
+install:
+    - rm -rf node_modules/mdbootstrap/.git/
+    - npm install
+script:
+    - npm run build-all-libs
 cache:
     directories:
         - "node_modules"
@@ -8,6 +13,8 @@ notifications:
   email:
     recipients:
       - hutteryannick@gmail.com
+    template:
+      - "This is a custom text"
     on_success: always
     on_failure: always
 
