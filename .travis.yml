@@ -14,9 +14,7 @@ notifications:
       on_success: always
       on_failure: always
       template:
-      - "Yay another version is available <https://yahart.github.io/tasky/|here> :smile:"
-      - "%{repository_slug} (%{commit}) : %{message}"
-      - "Build details: %{build_url}"
+      - "Test"
   email:
     recipients:
       - hutteryannick@gmail.com
