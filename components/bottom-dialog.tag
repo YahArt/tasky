@@ -20,15 +20,15 @@
 
   <button ref="showModalButton" id="bottomModalActivate" type="button" class="btn btn-danger" data-toggle="modal" data-target="#bottomModal"></button>
 
-  <script type="coffee">
-    @on "toggle", (messageObj) ->
-      # Update message properties
-      @title = messageObj.title
-      @message = messageObj.message
-      @error = messageObj.error
-      @update()
+  <script>
+    this.on("toggle", (messageObj) => {
+      this.title = messageObj.title;
+      this.message = messageObj.message;
+      this.error = messageObj.error;
 
-      @refs.showModalButton.click()
+      this.update();
+      this.refs.showModalButton.click();
+    });
   </script>
 
   <style>

@@ -22,55 +22,50 @@
     </div>
   </div>
 
-  <bottom-dialog ref="dialog" opts={messageObj}></bottom-dialog>
+  <bottom-dialog ref="dialog"></bottom-dialog>
 
-  <script type="coffee">
-    config =
-      apiKey: "AIzaSyBI435cfbcRThHVc_gjUhq3hzqCGyNkvVs"
-      authDomain: "tasky-73057.firebaseapp.com"
-      databaseURL: "https://tasky-73057.firebaseio.com"
-      projectId: "tasky-73057"
-      storageBucket: "tasky-73057.appspot.com"
-      messagingSenderId: "205490839879"
+  <script>
+    const auth = firebase.auth();
 
-    firebase.initializeApp config
-
-    @auth = firebase.auth()
-
-    @login = ->
-      email = @refs.email.value
-      password = @refs.password.value
-
-      @auth.signInWithEmailAndPassword(email, password)
-      .then (result) =>
-        messageObj =
-          title: "Erfolg"
-          message: "Sie haben sich erfolgreich angemeldet..."
+    login() {
+      const email = this.refs.email.value;
+      const password = this.refs.password.value;
+      auth.signInWithEmailAndPassword(email, password).then(result => {
+        const messageObj = {
+          title: "Erfolg",
+          message: "Sie haben sich erfolgreich angemeldet...",
           error: false
-        @refs.dialog.trigger "toggle", messageObj
-      .catch (error) =>
-        messageObj =
-          title: "Fehler"
-          message: "#{error}"
+        };
+        this.refs.dialog.trigger("toggle", messageObj);
+      }).catch(error => {
+        const messageObj = {
+          title: "Fehler",
+          message: `${error}`,
           error: true
-        @refs.dialog.trigger "toggle", messageObj
+        };
+        this.refs.dialog.trigger("toggle", messageObj);
+      })
+    }
 
-    @createAccount = ->
-      email = @refs.email.value
-      password = @refs.password.value
-      @auth.createUserWithEmailAndPassword(email, password)
-      .then (result) =>
-        messageObj =
-          title: "Erfolg"
-          message: "Ihr Account wurde erstellt, bitte melden Sie sich an..."
+    createAccount() {
+      const email = this.refs.email.value;
+      const password = this.refs.password.value;
+      auth.createUserWithEmailAndPassword(email, password).then(result => {
+        const messageObj = {
+          title: "Erfolg",
+          message: "Ihr Account wurde erfolgreich angelegt...",
           error: false
-        @refs.dialog.trigger "toggle", messageObj
-      .catch (error) =>
-        messageObj =
-          title: "Fehler"
-          message: "#{error}"
+        };
+        this.refs.dialog.trigger("toggle", messageObj);
+      }).catch(error => {
+        const messageObj = {
+          title: "Fehler",
+          message: `${error}`,
           error: true
-        @refs.dialog.trigger "toggle", messageObj
+        };
+        this.refs.dialog.trigger("toggle", messageObj);
+      })
+    }
   </script>
 
   <style>
