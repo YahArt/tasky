@@ -11,8 +11,8 @@ riot.tag2('tasky', '<div id="content"></div>', '', '', function(opts) {
     route(currentRoute => {
       switch (currentRoute) {
         case "login":
-          break;
           switchPage("login");
+          break;
         case "dashboard":
           switchPage("dashboard");
           break;

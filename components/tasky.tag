@@ -15,8 +15,8 @@
     route(currentRoute => {
       switch (currentRoute) {
         case "login":
-          break;
           switchPage("login");
+          break;
         case "dashboard":
           switchPage("dashboard");
           break;
