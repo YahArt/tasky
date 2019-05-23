@@ -8,7 +8,11 @@
     "build-css-libs": "uglifycss node_modules/mdbootstrap/css/bootstrap.min.css node_modules/mdbootstrap/css/mdb.min.css > css/libs.css",
     "build-all-libs": "npm run build-js-libs & npm run build-css-libs",
     "watch": "concurrently --kill-others \"riot --config riot.config.js\" \"browser-sync start --config bs-config.js\"",
-    "start": "npm run build-all-libs & npm run watch"
+    "start": "npm run build-all-libs & npm run watch",
+    "clear-publish": "rm -rf ./publish",
+    "create-publish-structure": "mkdir publish publish\\js publish\\css publish\\font",
+    "copy-to-publish": "cp -r ./js ./publish && cp -r ./css ./publish && cp -r ./font ./publish && cp ./index.html ./publish",
+    "publish": "npm run clear-publish && npm run create-publish-structure && npm run copy-to-publish"
   },
   "repository": {
     "type": "git",
