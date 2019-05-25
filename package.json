@@ -4,8 +4,8 @@
   "description": "Yet another but refreshing todo app with gamification",
   "main": "main.js",
   "scripts": {
-    "build-js-libs": "uglifyjs node_modules/mdbootstrap/js/jquery-3.3.1.min.js node_modules/mdbootstrap/js/popper.min.js node_modules/mdbootstrap/js/bootstrap.min.js node_modules/mdbootstrap/js/mdb.min.js node_modules/riot/riot.min.js node_modules/riot-route/dist/route+tag.min.js -o js/libs.js",
-    "build-css-libs": "uglifycss node_modules/mdbootstrap/css/bootstrap.min.css node_modules/mdbootstrap/css/mdb.min.css > css/libs.css",
+    "build-js-libs": "uglifyjs node_modules/mdbootstrap/js/jquery-3.3.1.min.js node_modules/mdbootstrap/js/popper.min.js node_modules/mdbootstrap/js/bootstrap.min.js node_modules/mdbootstrap/js/mdb.min.js node_modules/riot/riot.min.js node_modules/riot-route/dist/route+tag.min.js node_modules/idb/build/iife/index-min.js -o js/libs.js",
+    "build-css-libs": "uglifycss node_modules/mdbootstrap/css/bootstrap.min.css node_modules/mdbootstrap/css/mdb.min.css node_modules/@fortawesome/fontawesome-free/css/all.min.css > css/libs.css",
     "build-all-libs": "npm run build-js-libs & npm run build-css-libs",
     "watch": "concurrently --kill-others \"riot --config riot.config.js\" \"browser-sync start --config bs-config.js\"",
     "start": "npm run build-all-libs & npm run watch",
@@ -25,6 +25,8 @@
   "license": "MIT",
   "homepage": "https://github.com/YahArt/tasky#readme",
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.8.2",
+    "idb": "^4.0.3",
     "mdbootstrap": "^4.7.7",
     "riot": "^3.13.2",
     "riot-route": "^3.1.4"
@@ -32,7 +34,7 @@
   "devDependencies": {
     "browser-sync": "^2.26.5",
     "concurrently": "^4.1.0",
-    "uglify-js": "^3.5.9",
+    "uglify-es": "^3.3.9",
     "uglifycss": "0.0.29"
   }
 }

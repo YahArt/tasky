@@ -14,14 +14,32 @@
   <body>
     <tasky></tasky>
 
+    <script type="module">
+import { openDB, deleteDB } from 'https://unpkg.com/idb?module'
+</script>
+
+
+    <!-- Include mixins here -->
+    <script src="js/task-repository.js"></script>
+
     <!-- Register all components here -->
     <script src="js/libs.js"></script>
     <script src="js/tasky.js"></script>
     <script src="js/login.js"></script>
-    <script src="js/dashboard.js"></script>
+    <script src="js/header.js"></script>
+    <script src="js/side-nav.js"></script>
+    <script src="js/task.js"></script>
+    <script src="js/add-task-button.js"></script>
+    <script src="js/task-overview.js"></script>
+    <script src="js/task-list.js"></script>
+    <script src="js/archievments.js"></script>
     <script src="js/register.js"></script>
 
     <script>
+      // Register all mixins which are global here
+      riot.mixin('TaskRepository', TaskRepository);
+
+      // Mount all components
       riot.mount('*');
     </script>
 
