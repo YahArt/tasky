@@ -27,9 +27,13 @@
     login() {
       const email = this.refs.email.value;
       const password = this.refs.password.value;
+      // TODO: Remove after finishing
+      route('task-overview', 'Tasky - Taskübersicht');
+      /*
       if (email !== '' && password !== '') {
-        route('dashboard', 'Tasky - Dashboard');
+        route('task-overview', 'Tasky - Taskübersicht');
       }
+      */
     }
 
     register() {

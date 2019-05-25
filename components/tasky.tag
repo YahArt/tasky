@@ -17,8 +17,11 @@
         case "login":
           switchPage("login");
           break;
-        case "dashboard":
-          switchPage("dashboard");
+        case "task-overview":
+          switchPage("task-overview");
+          break;
+        case "archievments":
+          switchPage("archievments");
           break;
         case "register":
           switchPage("register");
@@ -29,6 +32,8 @@
           break;
       }
     });
+
     route.start(true);
+
   </script>
 </tasky>
