@@ -9,8 +9,8 @@
       </h4>
       <p class="card-text">{opts.task.description}</p>
       <div class="task-action-container">
-        <a href="#/task-overview">
-          <i class="far fa-heart"></i>
+        <a href="#/task-overview" onClick="{toggleFavourite}" class="{isFavourite: opts.task.isFavourite}">
+          <i class="{far: !opts.task.isFavourite, fas: opts.task.isFavourite} fa-heart"></i>
         </a>
         <a href="#/task-overview">
           <i class="fas fa-pen"></i>
@@ -32,6 +32,11 @@
     this.deleteTask = function()  {
       this.parent.deleteTask(this.opts.task);
     }
+
+    this.toggleFavourite = function() {
+      this.parent.toggleFavourite(this.opts.task);
+    }
+
   </script>
 
   <style media="screen">
@@ -57,7 +62,7 @@
       transition: color 0.5s ease;
     }
     .task-action-container a:hover {
-      color: red;
+      color: white;
     }
 
     .date {
@@ -67,6 +72,10 @@
 
     .card .card-body .card-text {
       color: inherit;
+    }
+
+    .isFavourite {
+      color: red !important;
     }
   </style>
 

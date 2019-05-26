@@ -19,6 +19,15 @@ let TaskRepository = {
     });
   },
 
+  taskRepoUpdateTask: function(task) {
+    return this.dbPromise.then(function (db) {
+      var transaction = db.transaction(['tasks'], 'readwrite');
+      var store = transaction.objectStore('tasks');
+      store.put(task);
+      return store.getAll();
+    });
+  },
+
   taskRepoDeleteTask: function(task) {
     return this.dbPromise.then(function (db) {
       var transaction = db.transaction(['tasks'], 'readwrite');
