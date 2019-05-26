@@ -12,7 +12,7 @@
         <a href="#/task-overview" onClick="{toggleFavourite}" class="{isFavourite: opts.task.isFavourite}">
           <i class="{far: !opts.task.isFavourite, fas: opts.task.isFavourite} fa-heart"></i>
         </a>
-        <a href="#/task-overview">
+        <a onClick="{editTask}" href="#/task-overview">
           <i class="fas fa-pen"></i>
         </a>
 
@@ -35,6 +35,10 @@
 
     this.toggleFavourite = function() {
       this.parent.toggleFavourite(this.opts.task);
+    }
+
+    this.editTask = function() {
+      this.parent.editTask(this.opts.task);
     }
 
   </script>

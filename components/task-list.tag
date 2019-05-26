@@ -12,7 +12,6 @@
     // Require task repository
     this.mixin('TaskRepository');
     this.defaultTasks = [];
-
     // In case the user wants to update a specific task etc. -> Gets called by task via parent...
     this.deleteTask = function (taskToDelete) {
       this.taskRepoDeleteTask(taskToDelete).then(tasks => {
@@ -28,16 +27,27 @@
         this.defaultTasks = tasks;
         this.update();
       });
-
     }
 
-    // TODO: In case the user wants to create a task etc. -> Gets called by task via parent...
+    // In case the user wants to create a task etc. -> Gets called by task via parent...
     this.createTask = function(task) {
       this.taskRepoAddTask(task).then(tasks => {
         this.defaultTasks = tasks;
         this.update();
       });
+    }
 
+    // In case the user wants to save changes done on a task...
+    this.updateTask = function(task) {
+      this.taskRepoUpdateTask(task).then(tasks => {
+        this.defaultTasks = tasks;
+        this.update();
+      });
+    }
+
+    // In case the user wants to edit a task
+    this.editTask = function(task) {
+      this.refs.taskModal.openWithTask(task);
     }
 
     this.on('mount', function () {
@@ -50,13 +60,7 @@
       // In case the user wants to add a new task...
       this.refs.addTaskButton.on('addTask', () => {
         // Launch modal so that the user can enter the appropriate information
-        this.refs.taskModal.createNewTask();
-        /*
-        this.taskRepoAddDummyTask().then(tasks => {
-          this.defaultTasks = tasks;
-          this.update();
-        });
-        */
+        this.refs.taskModal.open();
       });
 
     });
