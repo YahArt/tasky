@@ -3,17 +3,27 @@ riot.tag2('task-list', '<div class="row"> <div each="{task in defaultTasks}" cla
     this.mixin('TaskRepository');
     this.defaultTasks = [];
 
-      // In case the user wants to update a specific task etc. -> Gets called by task via parent...
-    this.deleteTask = function(taskToDelete) {
+    // In case the user wants to update a specific task etc. -> Gets called by task via parent...
+    this.deleteTask = function (taskToDelete) {
       this.taskRepoDeleteTask(taskToDelete).then(tasks => {
         this.defaultTasks = tasks;
         this.update();
       });
     };
 
+    // In case the user makes a task its its favourite
+    this.toggleFavourite = function(task) {
+      task.isFavourite = !task.isFavourite;
+      this.taskRepoUpdateTask(task).then(tasks => {
+        this.defaultTasks = tasks;
+        this.update();
+      });
+
+    }
+
     // TODO: In case the user wants to edit a task etc. -> Gets called by task via parent...
 
-    this.on('mount', function() {
+    this.on('mount', function () {
       // First load all available tasks...
       this.taskRepoGetAllTasks().then((tasks) => {
         this.defaultTasks = tasks;

@@ -2,7 +2,7 @@
   <div class="header">
     <h1>Tasky</h1>
     <!-- Image is from: https://t2.rbxcdn.com/f37dbf676862a314cdb3f98c08460146-->
-    <img src="../images/profile-picture.png" class="profile-picture rounded-circle" alt="Profile Picture">
+    <img src="./images/profile-picture.png" class="profile-picture rounded-circle" alt="Profile Picture">
     <p>Pusheen The Cat</p>
     <p>Level 1</p>
     <div class="progress">
