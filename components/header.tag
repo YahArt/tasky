@@ -26,7 +26,7 @@
       justify-content: center;
       align-items: center;
       height: 400px;
-      /*Inspiration from: https://codepen.io/sdthornton/pen/wBZdXq*/
+      border-bottom: 1px solid black;
     }
     .profile-picture {
       margin: 10px 0;

@@ -71,7 +71,8 @@
       padding-bottom: 5px;
     }
     .active {
-      border-bottom: 1px solid black;
+      font-weight: bold;
+      color: #E91E63 !important;
     }
   </style>
 </side-nav>

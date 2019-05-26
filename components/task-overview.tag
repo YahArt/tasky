@@ -7,6 +7,7 @@
 
   <style media="screen">
     .task-overview-container {
+      padding-top: 50px;
       padding-left: 250px;
     }
   </style>
