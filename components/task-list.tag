@@ -4,6 +4,7 @@
       <task task="{task}"></task>
     </div>
     <add-task-button ref="addTaskButton"></add-task-button>
+    <task-modal ref="taskModal"></task-modal>
 
   </div>
 
@@ -30,7 +31,14 @@
 
     }
 
-    // TODO: In case the user wants to edit a task etc. -> Gets called by task via parent...
+    // TODO: In case the user wants to create a task etc. -> Gets called by task via parent...
+    this.createTask = function(task) {
+      this.taskRepoAddTask(task).then(tasks => {
+        this.defaultTasks = tasks;
+        this.update();
+      });
+
+    }
 
     this.on('mount', function () {
       // First load all available tasks...
@@ -41,11 +49,16 @@
 
       // In case the user wants to add a new task...
       this.refs.addTaskButton.on('addTask', () => {
+        // Launch modal so that the user can enter the appropriate information
+        this.refs.taskModal.createNewTask();
+        /*
         this.taskRepoAddDummyTask().then(tasks => {
           this.defaultTasks = tasks;
           this.update();
         });
+        */
       });
+
     });
   </script>
 

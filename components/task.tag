@@ -3,7 +3,7 @@
     <div class="card-body">
 
       <h4 class="card-title">
-        <a>{opts.task.id}</a>
+        <a>{opts.task.name}</a>
 
         <p class="date">{opts.task.date.toLocaleDateString()}</p>
       </h4>
