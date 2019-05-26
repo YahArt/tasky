@@ -2,7 +2,7 @@
   <header></header>
   <side-nav></side-nav>
   <div class="archievments-container container-fluid">
-    <h1>Archievments</h1>
+    <h1>Work in Progress...</h1>
   </div>
 
   <script type="text/javascript">
