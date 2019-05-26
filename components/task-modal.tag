@@ -39,7 +39,6 @@
             <div class="col-md-4 offset-md-2">
               <div class="md-form">
                 <button onclick="{addTag}" class="btn btn-primary btn-sm">Tag hinzufügen</button>
-
               </div>
             </div>
           </div>
