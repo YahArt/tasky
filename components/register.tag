@@ -97,7 +97,7 @@
       </div>
 
       <div class="col-md-8 offset-md-1">
-          <input type="range" class="custom-range" id="organisation" min="0" max="10" step="1">
+        <input type="range" class="custom-range" id="organisation" min="0" max="10" step="1">
       </div>
 
       <div class="col-md-3">
@@ -105,7 +105,7 @@
       </div>
 
       <div class="col-md-8 offset-md-1">
-          <input type="range" class="custom-range" id="structure" min="0" max="10" step="1">
+        <input type="range" class="custom-range" id="structure" min="0" max="10" step="1">
       </div>
 
       <div class="col-md-3">
@@ -113,7 +113,7 @@
       </div>
 
       <div class="col-md-8 offset-md-1">
-          <input type="range" class="custom-range" id="finance" min="0" max="10" step="1">
+        <input type="range" class="custom-range" id="finance" min="0" max="10" step="1">
       </div>
 
       <div class="col-md-3">
@@ -121,7 +121,7 @@
       </div>
 
       <div class="col-md-8 offset-md-1">
-          <input type="range" class="custom-range" id="flexiblity" min="0" max="10" step="1">
+        <input type="range" class="custom-range" id="flexiblity" min="0" max="10" step="1">
       </div>
     </div>
 
@@ -137,11 +137,13 @@
   </div>
 
   <script>
-    register() {
+    register(e) {
+      e.preventDefault();
       route('login', 'Tasky - Login');
     }
 
-    cancel() {
+    cancel(e) {
+      e.preventDefault();
       route('login', 'Tasky - Login');
     }
   </script>

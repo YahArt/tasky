@@ -1,5 +1,5 @@
 riot.tag2('task-list', '<div class="row"> <div class="col-md-7 md-form mt-0"> <input ref="filterValue" class="form-control" type="text" placeholder="Durchsuche deine Tasks" aria-label="Search"> </div> <div class="col-md-2 offset-md-1"> <button onclick="{filterTask}" class="btn btn-primary btn-sm">Filter anwenden</button> </div> <div class="col-md-2"> <button onclick="{clearFilter}" class="btn btn-primary btn-sm">Filter löschen</button> </div> </div> <div class="row"> <div each="{task in displayedTasks}" class="col-md-3"> <task task="{task}"></task> </div> <add-task-button ref="addTaskButton"></add-task-button> <task-modal ref="taskModal"></task-modal> </div>', '', '', function(opts) {
-    // Require task repository
+    // Require tasky repository
     this.mixin('TaskRepository');
     this.allTasks = [];
     this.filteredTasks = [];

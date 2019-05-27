@@ -21,7 +21,7 @@
   </div>
 
   <script type="text/javascript">
-    // Require task repository
+    // Require tasky repository
     this.mixin('TaskRepository');
     this.allTasks = [];
     this.filteredTasks = [];
@@ -93,6 +93,7 @@
         this.displayedTasks = this.allTasks;
         this.update();
       });
+
 
       // In case the user wants to add a new task...
       this.refs.addTaskButton.on('addTask', () => {

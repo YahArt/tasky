@@ -34,6 +34,5 @@
     });
 
     route.start(true);
-
   </script>
 </tasky>

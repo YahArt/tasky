@@ -29,15 +29,18 @@
   </div>
 
   <script type="text/javascript">
-    this.deleteTask = function()  {
+    this.deleteTask = function(e)  {
+      e.preventDefault();
       this.parent.deleteTask(this.opts.task);
     }
 
-    this.toggleFavourite = function() {
+    this.toggleFavourite = function(e) {
+      e.preventDefault();
       this.parent.toggleFavourite(this.opts.task);
     }
 
-    this.editTask = function() {
+    this.editTask = function(e) {
+      e.preventDefault();
       this.parent.editTask(this.opts.task);
     }
 
