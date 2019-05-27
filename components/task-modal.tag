@@ -85,11 +85,12 @@
   </div>
 
   <script>
-    this.mixin('UserRepository');
+    this.mixin('TaskyRepository');
     const defaultTask = {
       name: '',
       description: '',
       isFavourite: false,
+      points: 20,
       tags: [],
       skills: [
         'Skill 1', 'Skill 2', 'Skill 3'
@@ -181,6 +182,8 @@
       this.task.name = this.refs.taskName.value;
       this.task.description = this.refs.taskDescription.value;
       this.task.date = new Date(this.refs.taskDate.value);
+      const selectedTaskPriorityDescription = this.task.priorities.filter(p => p.isPriority)[0].description;
+      this.task.points = this.calculatePointsAccordingToPriority(selectedTaskPriorityDescription);
       this.parent.createTask(this.task);
     };
 
@@ -188,6 +191,8 @@
       this.task.name = this.refs.taskName.value;
       this.task.description = this.refs.taskDescription.value;
       this.task.date = new Date(this.refs.taskDate.value);
+      const selectedTaskPriorityDescription = this.task.priorities.filter(p => p.isPriority)[0].description;
+      this.task.points = this.calculatePointsAccordingToPriority(selectedTaskPriorityDescription);
       this.parent.updateTask(this.task)
     }
 
@@ -211,6 +216,19 @@
         this.task.tags.push(newTag);
       }
     };
+
+    this.calculatePointsAccordingToPriority = function (priorityDescription) {
+      switch (priorityDescription) {
+        case "Hoch":
+          return 50;
+        case "Mittel":
+          return 30;
+        case "Tief":
+          return 20;
+        default:
+          return 0;
+      }
+    }
 
     this.on('mount', function () {
       $(".task-date").flatpickr(flatPickrConfig);

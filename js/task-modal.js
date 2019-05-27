@@ -1,9 +1,10 @@
 riot.tag2('task-modal', '<div class="modal fade" id="taskModal" tabindex="-1" role="dialog" aria-labelledby="taskModalLabel" aria-hidden="true"> <div class="modal-dialog modal-lg" role="document"> <div class="modal-content"> <div class="modal-header text-center"> <h4 show="{this.editMode}" class="modal-title w-100 font-weight-bold">Task editieren</h4> <h4 hide="{this.editMode}" class="modal-title w-100 font-weight-bold">Task erstellen</h4> <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button> </div> <div class="modal-body mx-3"> <div class="row"> <div class="col-md-4 offset-md-1"> <div class="md-form"> <input ref="taskName" required="required" type="text" id="taskName" class="form-control validate"> <label for="taskName">Name des Tasks</label> </div> </div> <div class="col-md-4 offset-md-2"> <div class="md-form"> <input ref="currentTag" type="text" id="taskTags" class="form-control"> <label for="taskTags">Tag eingeben</label> <span class="badge badge-pill badge-default" each="{tag, index in task.tags}">{tag}<i onclick="{removeTag}" class="fas fa-times ml-2"></i> </span> </div> </div> </div> <div class="row"> <div class="col-md-4 offset-md-1"> <div class="md-form"> <textarea ref="taskDescription" type="text" id="taskDescription" class="md-textarea form-control" rows="4"></textarea> <label for="taskDescription">Beschreibung des Tasks</label> </div> </div> <div class="col-md-4 offset-md-2"> <div class="md-form"> <button onclick="{addTag}" class="btn btn-primary btn-sm">Tag hinzufügen</button> </div> </div> </div> <div class="row"> <div class="col-md-4 offset-md-1"> <div class="md-form"> <input ref="taskDate" id="taskDate" class="task-date flatpickr flatpickr-input" type="text" placeholder="Fälligkeitsdatum" readonly="readonly"> </div> </div> <div class="col-md-4 offset-md-2"> <div class="md-form"> <p>Skills</p> <span class="badge badge-pill badge-default" each="{skill, index in task.skills}">{skill}<i onclick="{removeSkill}" class="fas fa-times ml-2"></i> </span> </div> </div> </div> <div class="row"> <div class="col-md-4 offset-md-1"> <div class="md-form"> <p>Priorität</p> <span onclick="{makeTaskPriority}" class="{priority: taskPriority.isPriority} badge badge-pill badge-default" each="{taskPriority, index in task.priorities}">{taskPriority.description}</span> </div> </div> <div class="col-md-4 offset-md-2"> <div class="md-form"> <p>Favorit</p> <i onclick="{toggleFavourite}" class="{isFavourite: task.isFavourite, far: !task.isFavourite, fas: task.isFavourite} fa-heart"></i> </div> </div> </div> </div> <div class="modal-footer d-flex justify-content-center"> <button hide="{this.editMode}" onclick="{createTask}" class="btn btn-default">Task erstellen</button> <button show="{this.editMode}" onclick="{updateTask}" class="btn btn-default">Änderungen speichern</button> </div> </div> </div> </div>', 'task-modal .modal-trigger,[data-is="task-modal"] .modal-trigger{ display: none; } task-modal .modal-dialog,[data-is="task-modal"] .modal-dialog{ width: 50vw; } task-modal .badge,[data-is="task-modal"] .badge{ margin: 3px; } task-modal .priority,[data-is="task-modal"] .priority{ background-color: red !important; } task-modal .isFavourite,[data-is="task-modal"] .isFavourite{ color: red !important; } task-modal .hidden,[data-is="task-modal"] .hidden{ display: none; }', '', function(opts) {
-    this.mixin('UserRepository');
+    this.mixin('TaskyRepository');
     const defaultTask = {
       name: '',
       description: '',
       isFavourite: false,
+      points: 20,
       tags: [],
       skills: [
         'Skill 1', 'Skill 2', 'Skill 3'
@@ -93,6 +94,8 @@ riot.tag2('task-modal', '<div class="modal fade" id="taskModal" tabindex="-1" ro
       this.task.name = this.refs.taskName.value;
       this.task.description = this.refs.taskDescription.value;
       this.task.date = new Date(this.refs.taskDate.value);
+      const selectedTaskPriorityDescription = this.task.priorities.filter(p => p.isPriority)[0].description;
+      this.task.points = this.calculatePointsAccordingToPriority(selectedTaskPriorityDescription);
       this.parent.createTask(this.task);
     };
 
@@ -100,6 +103,8 @@ riot.tag2('task-modal', '<div class="modal fade" id="taskModal" tabindex="-1" ro
       this.task.name = this.refs.taskName.value;
       this.task.description = this.refs.taskDescription.value;
       this.task.date = new Date(this.refs.taskDate.value);
+      const selectedTaskPriorityDescription = this.task.priorities.filter(p => p.isPriority)[0].description;
+      this.task.points = this.calculatePointsAccordingToPriority(selectedTaskPriorityDescription);
       this.parent.updateTask(this.task)
     }
 
@@ -123,6 +128,19 @@ riot.tag2('task-modal', '<div class="modal fade" id="taskModal" tabindex="-1" ro
         this.task.tags.push(newTag);
       }
     };
+
+    this.calculatePointsAccordingToPriority = function (priorityDescription) {
+      switch (priorityDescription) {
+        case "Hoch":
+          return 50;
+        case "Mittel":
+          return 30;
+        case "Tief":
+          return 20;
+        default:
+          return 0;
+      }
+    }
 
     this.on('mount', function () {
       $(".task-date").flatpickr(flatPickrConfig);

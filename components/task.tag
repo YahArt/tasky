@@ -20,7 +20,7 @@
           <i class="fas fa-trash"></i>
         </a>
 
-        <a href="#/task-overview">
+        <a onClick="{completeTask}" href="#/task-overview">
           <i class="fas fa-check"></i>
         </a>
       </div>
@@ -42,6 +42,11 @@
     this.editTask = function(e) {
       e.preventDefault();
       this.parent.editTask(this.opts.task);
+    }
+
+    this.completeTask = function(e) {
+      e.preventDefault();
+      this.parent.completeTask(this.opts.task);
     }
 
   </script>

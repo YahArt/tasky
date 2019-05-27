@@ -1,9 +1,10 @@
-riot.tag2('task-list', '<div class="row"> <div class="col-md-7 md-form mt-0"> <input ref="filterValue" class="form-control" type="text" placeholder="Durchsuche deine Tasks" aria-label="Search"> </div> <div class="col-md-2 offset-md-1"> <button onclick="{filterTask}" class="btn btn-primary btn-sm">Filter anwenden</button> </div> <div class="col-md-2"> <button onclick="{clearFilter}" class="btn btn-primary btn-sm">Filter löschen</button> </div> </div> <div class="row"> <div each="{task in displayedTasks}" class="col-md-3"> <task task="{task}"></task> </div> <add-task-button ref="addTaskButton"></add-task-button> <task-modal ref="taskModal"></task-modal> </div>', '', '', function(opts) {
+riot.tag2('task-list', '<div class="row"> <div class="col-md-7 md-form mt-0"> <input ref="filterValue" class="form-control" type="text" placeholder="Durchsuche deine Tasks" aria-label="Search"> </div> <div class="col-md-2 offset-md-1"> <button onclick="{filterTask}" class="btn btn-primary btn-sm">Filter anwenden</button> </div> <div class="col-md-2"> <button onclick="{clearFilter}" class="btn btn-primary btn-sm">Filter löschen</button> </div> </div> <div class="row"> <div each="{task in displayedTasks}" class="col-md-3"> <task task="{task}"></task> </div> <add-task-button ref="addTaskButton"></add-task-button> <task-modal ref="taskModal"></task-modal> <complete-task-modal ref="completeTaskModal"></task-modal> </div>', '', '', function(opts) {
     // Require tasky repository
-    this.mixin('TaskRepository');
+    this.mixin('TaskyRepository');
     this.allTasks = [];
     this.filteredTasks = [];
     this.displayedTasks = [];
+
     // In case the user wants to update a specific task etc. -> Gets called by task via parent...
     this.deleteTask = function (taskToDelete) {
       this.taskRepoDeleteTask(taskToDelete).then(tasks => {
@@ -44,6 +45,11 @@ riot.tag2('task-list', '<div class="row"> <div class="col-md-7 md-form mt-0"> <i
     // In case the user wants to edit a task
     this.editTask = function (task) {
       this.refs.taskModal.openWithTask(task);
+    }
+
+    // In case the user wants to complete a task
+    this.completeTask = function (task) {
+      this.refs.completeTaskModal.open(task);
     }
 
     // In case the user wants to filter

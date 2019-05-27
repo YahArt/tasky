@@ -15,8 +15,7 @@
     <tasky></tasky>
 
     <!-- Include mixins here -->
-    <script src="js/task-repository.js"></script>
-    <script src="js/user-repository.js"></script>
+    <script src="js/tasky-repository.js"></script>
 
     <!-- Register all components here -->
     <script src="js/libs.js"></script>
@@ -26,6 +25,7 @@
     <script src="js/side-nav.js"></script>
     <script src="js/task.js"></script>
     <script src="js/task-modal.js"></script>
+    <script src="js/complete-task-modal.js"></script>
     <script src="js/add-task-button.js"></script>
     <script src="js/task-overview.js"></script>
     <script src="js/task-list.js"></script>
@@ -34,8 +34,7 @@
 
     <script>
       // Register all mixins which are global here
-      riot.mixin('TaskRepository', TaskRepository);
-      riot.mixin('UserRepository', UserRepository);
+      riot.mixin('TaskyRepository', TaskyRepository);
 
       // Mount all components
       riot.mount('*');

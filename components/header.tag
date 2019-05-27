@@ -52,7 +52,7 @@
 
 <script type="text/javascript">
   // Require tasky repository
-  this.mixin('UserRepository');
+  this.mixin('TaskyRepository');
   const defaultUser = {
     name: '',
     level: 1,
