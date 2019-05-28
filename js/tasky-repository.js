@@ -35,7 +35,15 @@ let TaskyRepository = {
     var transaction = db.transaction(['tasks'], 'readwrite');
     var store = transaction.objectStore('tasks');
     store.add(task);
-    return store.getAll();
+    let cursor = await store.openCursor();
+    const results = [];
+    while (cursor) {
+      const task = cursor.value;
+      if (task && task.active === true)
+      results.push(cursor.value);
+      cursor = await cursor.continue();
+    }
+    return results;
   },
 
   taskRepoUpdateTask: async function(task) {
@@ -43,7 +51,15 @@ let TaskyRepository = {
     var transaction = db.transaction(['tasks'], 'readwrite');
     var store = transaction.objectStore('tasks');
     store.put(task);
-    return store.getAll();
+    let cursor = await store.openCursor();
+    const results = [];
+    while (cursor) {
+      const task = cursor.value;
+      if (task && task.active === true)
+      results.push(cursor.value);
+      cursor = await cursor.continue();
+    }
+    return results;
   },
 
   taskRepoDeleteTask: async function(task) {
@@ -51,12 +67,15 @@ let TaskyRepository = {
     var transaction = db.transaction(['tasks'], 'readwrite');
     var store = transaction.objectStore('tasks');
     store.delete(task.id);
-    return store.getAll();
-  },
-
-  taskRepoAddDummyTask: async function() {
-    const dummyTask = this.taskRepoGetDefaultTasks()[0];
-    return this.taskRepoAddTask(dummyTask);
+    let cursor = await store.openCursor();
+    const results = [];
+    while (cursor) {
+      const task = cursor.value;
+      if (task && task.active === true)
+      results.push(cursor.value);
+      cursor = await cursor.continue();
+    }
+    return results;
   },
 
   taskRepoGetAllTasks: async function() {
@@ -65,6 +84,61 @@ let TaskyRepository = {
     var store = transaction.objectStore('tasks');
     return store.getAll();
   },
+
+  taskRepoGetAllActiveTasks: async function() {
+    const db = await this.taskyRepoOpenAndInitialize();
+    var transaction = db.transaction(['tasks'], 'readonly');
+    var store = transaction.objectStore('tasks');
+    let cursor = await store.openCursor();
+    const results = [];
+    while (cursor) {
+      const task = cursor.value;
+      if (task && task.active === true)
+      results.push(cursor.value);
+      cursor = await cursor.continue();
+    }
+    return results;
+  },
+
+  taskRepoFilterTasks: async function(filterValue, onlyFavourites) {
+    const db = await this.taskyRepoOpenAndInitialize();
+    var transaction = db.transaction(['tasks'], 'readonly');
+    var store = transaction.objectStore('tasks');
+    let cursor = await store.openCursor();
+    const results = [];
+    while (cursor) {
+      const task = cursor.value;
+      if (task && task.active === true)
+      if (filterValue) {
+        // Check if filterValue is a potential date
+        const date = new Date(filterValue);
+        if (date && !isNaN(date.getTime())) {
+          // Compare dates only by year month and day ignore hours etc. as we do not have any way to set them...
+          if (task.date && task.date.year === date.year && task.date.monthIndex === date.monthIndex && task.date.day === date.day) {
+            results.push(task);
+          }
+        }
+        // No Date entered just search other properties
+        else {
+          // Allow filtering by name, description, skills or tags
+          if (task.name.toLowerCase().includes(filterValue.toLowerCase()) || task.description.toLowerCase().includes(filterValue.toLowerCase()) || task.skills.some(s => s.toLowerCase().includes(filterValue.toLowerCase())) || task.tags.some(t => t.toLowerCase().includes(filterValue.toLowerCase()))) {
+            results.push(task);
+          }
+        }
+      } else {
+        // Ignore filter value just add id
+        results.push(task);
+      }
+      cursor = await cursor.continue();
+    }
+    // Depending on onlyFavourites flag only include onlyFavourites
+    if (onlyFavourites) {
+      return results.filter(r => r.isFavourite);
+    }
+    return results;
+  },
+
+
 
   userRepoAddUser: async function(user) {
     const db = await this.taskyRepoOpenAndInitialize();

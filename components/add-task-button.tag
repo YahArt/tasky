@@ -1,14 +1,13 @@
 <add-task-button>
   <!-- Inspiration from:  https://codepen.io/androidcss/pen/yOopGp -->
-  <a onclick="{emitAddingTask}" href="#/task-overview" class="float">
+  <a onclick="{openAddTaskModal}" href="#/task-overview" class="float">
     <i class="fa fa-plus my-float"></i>
   </a>
 
   <script type="text/javascript">
-
-    this.emitAddingTask = (e) => {
+    this.openAddTaskModal = (e) => {
       e.preventDefault();
-      this.trigger('addTask');
+      this.parent.openAddTaskModal();
     }
   </script>
 

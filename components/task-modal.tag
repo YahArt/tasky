@@ -91,6 +91,7 @@
       description: '',
       isFavourite: false,
       points: 20,
+      active: true,
       tags: [],
       skills: [
         'Skill 1', 'Skill 2', 'Skill 3'
