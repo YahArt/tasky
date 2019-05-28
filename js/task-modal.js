@@ -5,6 +5,7 @@ riot.tag2('task-modal', '<div class="modal fade" id="taskModal" tabindex="-1" ro
       description: '',
       isFavourite: false,
       points: 20,
+      active: true,
       tags: [],
       skills: [
         'Skill 1', 'Skill 2', 'Skill 3'

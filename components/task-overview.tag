@@ -1,5 +1,5 @@
 <task-overview>
-  <header></header>
+  <header ref="header"></header>
   <side-nav></side-nav>
   <div class="task-overview-container container-fluid">
     <task-list></task-list>
@@ -11,5 +11,11 @@
       padding-left: 250px;
     }
   </style>
+
+  <script type="text/javascript">
+    this.completedTaskWithPoints = function(points) {
+      this.refs.header.trigger('completedTaskWithPoints', points);
+    }
+  </script>
 
 </task-overview>

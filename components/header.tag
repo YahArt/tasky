@@ -6,15 +6,9 @@
     <p>{this.currentUser.name}</p>
     <p>Level {this.currentUser.level}</p>
     <div class="progress">
-      <p class="progress-text">HP:
+      <p class="progress-text">Punkte:
       </p>
-      <div class="progress-bar progress-bar-striped progress-bar-animated progress-health" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%">100/150</div>
-    </div>
-
-    <div class="progress">
-      <p class="progress-text">MP:
-      </p>
-      <div id="health" class="progress-bar progress-bar-striped progress-bar-animated progress-magic" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%">25/100</div>
+      <div class="progress-bar progress-bar-striped progress-bar-animated progress-health" role="progressbar" aria-valuenow="{this.displayedExperiencePoints}" aria-valuemin="0" aria-valuemax="{this.experienceUntilNextLevel}" style="width: {this.displayedExperiencePoints}%">{this.displayedExperiencePoints}/{this.experienceUntilNextLevel}</div>
     </div>
   </div>
 
@@ -58,14 +52,48 @@
     level: 1,
     experiencePoints: 50,
     skills: [],
-  }
+  };
+
   this.currentUser = defaultUser;
+  this.experienceUntilNextLevel = defaultUser.level * 50;
+  this.displayedExperiencePoints = defaultUser.experiencePoints;
+  this.update();
   this.on('mount', function () {
     this.userRepoGetAllUsers().then((users) => {
       this.currentUser = users[0];
+      this.calculateUserLevel();
+      this.calculateExperiencePointsUntilNextLevel();
+      this.calculateDisplayedExperiencePoints();
       this.update();
     });
   });
+
+  // In case the user has reached more points. -> Gets called by taskOverview
+  this.on('completedTaskWithPoints', points => {
+    this.currentUser.experiencePoints = this.currentUser.experiencePoints + points;
+    this.calculateUserLevel();
+    this.calculateExperiencePointsUntilNextLevel();
+    this.calculateDisplayedExperiencePoints();
+    this.update();
+
+  });
+
+  // TODO: Fix this stuff...
+  this.calculateExperiencePointsUntilNextLevel = function() {
+    this.experienceUntilNextLevel = this.currentUser.level * 70;
+  }
+
+  this.calculateDisplayedExperiencePoints = function() {
+    this.displayedExperiencePoints = this.currentUser.experiencePoints % this.experienceUntilNextLevel;
+  }
+
+  this.calculateUserLevel = function() {
+    if (this.currentUser.experiencePoints >= this.experienceUntilNextLevel) {
+      this.currentUser.experiencePoints = this.currentUser.experiencePoints % this.experienceUntilNextLevel;
+      this.currentUser.level = this.currentUser.level + 1;
+    }
+  }
+
 </script>
 
 </header>
