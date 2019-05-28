@@ -18,14 +18,16 @@
     </div>
     <add-task-button ref="addTaskButton"></add-task-button>
     <task-modal ref="taskModal"></task-modal>
+    <complete-task-modal ref="completeTaskModal"></task-modal>
   </div>
 
   <script type="text/javascript">
-    // Require task repository
-    this.mixin('TaskRepository');
+    // Require tasky repository
+    this.mixin('TaskyRepository');
     this.allTasks = [];
     this.filteredTasks = [];
     this.displayedTasks = [];
+
     // In case the user wants to update a specific task etc. -> Gets called by task via parent...
     this.deleteTask = function (taskToDelete) {
       this.taskRepoDeleteTask(taskToDelete).then(tasks => {
@@ -67,6 +69,13 @@
     this.editTask = function (task) {
       this.refs.taskModal.openWithTask(task);
     }
+
+    // In case the user wants to complete a task
+    this.completeTask = function (task) {
+      this.refs.completeTaskModal.open(task);
+    }
+
+
 
     // In case the user wants to filter
     this.filterTask = function () {

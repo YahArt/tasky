@@ -24,7 +24,8 @@
   <bottom-dialog ref="dialog"></bottom-dialog>
 
   <script>
-    login() {
+    login(e) {
+      e.preventDefault();
       const email = this.refs.email.value;
       const password = this.refs.password.value;
       // TODO: Remove after finishing
@@ -36,7 +37,8 @@
       */
     }
 
-    register() {
+    register(e) {
+      e.preventDefault();
       route('register', 'Tasky - Registrierung');
 
     }

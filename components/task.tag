@@ -20,7 +20,7 @@
           <i class="fas fa-trash"></i>
         </a>
 
-        <a href="#/task-overview">
+        <a onClick="{completeTask}" href="#/task-overview">
           <i class="fas fa-check"></i>
         </a>
       </div>
@@ -29,16 +29,24 @@
   </div>
 
   <script type="text/javascript">
-    this.deleteTask = function()  {
+    this.deleteTask = function(e)  {
+      e.preventDefault();
       this.parent.deleteTask(this.opts.task);
     }
 
-    this.toggleFavourite = function() {
+    this.toggleFavourite = function(e) {
+      e.preventDefault();
       this.parent.toggleFavourite(this.opts.task);
     }
 
-    this.editTask = function() {
+    this.editTask = function(e) {
+      e.preventDefault();
       this.parent.editTask(this.opts.task);
+    }
+
+    this.completeTask = function(e) {
+      e.preventDefault();
+      this.parent.completeTask(this.opts.task);
     }
 
   </script>

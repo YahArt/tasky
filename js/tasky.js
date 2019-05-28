@@ -30,5 +30,4 @@ riot.tag2('tasky', '<div id="content"></div>', '', '', function(opts) {
     });
 
     route.start(true);
-
 });

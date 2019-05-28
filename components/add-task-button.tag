@@ -6,7 +6,8 @@
 
   <script type="text/javascript">
 
-    this.emitAddingTask = () => {
+    this.emitAddingTask = (e) => {
+      e.preventDefault();
       this.trigger('addTask');
     }
   </script>
