@@ -40,7 +40,7 @@ let TaskyRepository = {
     while (cursor) {
       const task = cursor.value;
       if (task && task.active === true)
-      results.push(cursor.value);
+        results.push(cursor.value);
       cursor = await cursor.continue();
     }
     return results;
@@ -56,7 +56,7 @@ let TaskyRepository = {
     while (cursor) {
       const task = cursor.value;
       if (task && task.active === true)
-      results.push(cursor.value);
+        results.push(cursor.value);
       cursor = await cursor.continue();
     }
     return results;
@@ -72,7 +72,7 @@ let TaskyRepository = {
     while (cursor) {
       const task = cursor.value;
       if (task && task.active === true)
-      results.push(cursor.value);
+        results.push(cursor.value);
       cursor = await cursor.continue();
     }
     return results;
@@ -94,7 +94,7 @@ let TaskyRepository = {
     while (cursor) {
       const task = cursor.value;
       if (task && task.active === true)
-      results.push(cursor.value);
+        results.push(cursor.value);
       cursor = await cursor.continue();
     }
     return results;
@@ -106,29 +106,34 @@ let TaskyRepository = {
     var store = transaction.objectStore('tasks');
     let cursor = await store.openCursor();
     const results = [];
+    const isSameDate = (a, b) => {
+      return a && b && a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
+    };
     while (cursor) {
       const task = cursor.value;
-      if (task && task.active === true)
-      if (filterValue) {
-        // Check if filterValue is a potential date
-        const date = new Date(filterValue);
-        if (date && !isNaN(date.getTime())) {
-          // Compare dates only by year month and day ignore hours etc. as we do not have any way to set them...
-          if (task.date && task.date.year === date.year && task.date.monthIndex === date.monthIndex && task.date.day === date.day) {
-            results.push(task);
+      if (task && task.active === true) {
+        if (filterValue) {
+          // Check if filterValue is a potential date
+          const date = new Date(filterValue);
+          if (date && !isNaN(date.getTime())) {
+            // Compare dates only by year month and day ignore hours etc. as we do not have any way to set them...
+            if (isSameDate(date, task.date)) {
+              results.push(task);
+            }
           }
-        }
-        // No Date entered just search other properties
-        else {
-          // Allow filtering by name, description, skills or tags
-          if (task.name.toLowerCase().includes(filterValue.toLowerCase()) || task.description.toLowerCase().includes(filterValue.toLowerCase()) || task.skills.some(s => s.toLowerCase().includes(filterValue.toLowerCase())) || task.tags.some(t => t.toLowerCase().includes(filterValue.toLowerCase()))) {
-            results.push(task);
+          // No Date entered just search other properties
+          else {
+            // Allow filtering by name, description, skills or tags
+            if (task.name.toLowerCase().includes(filterValue.toLowerCase()) || task.description.toLowerCase().includes(filterValue.toLowerCase()) || task.skills.some(s => s.toLowerCase().includes(filterValue.toLowerCase())) || task.tags.some(t => t.toLowerCase().includes(filterValue.toLowerCase()))) {
+              results.push(task);
+            }
           }
+        } else {
+          // Ignore filter value just add id
+          results.push(task);
         }
-      } else {
-        // Ignore filter value just add id
-        results.push(task);
       }
+
       cursor = await cursor.continue();
     }
     // Depending on onlyFavourites flag only include onlyFavourites
