@@ -135,7 +135,6 @@
 
     this.on('before-mount', () => {
       // Initialize form data here...
-      console.log('task-modal before-mount');
       this.editMode = false;
       this.task = defaultTask;
     });
@@ -240,12 +239,6 @@
   </script>
 
   <style media="screen">
-    .modal-trigger {
-      display: none;
-    }
-    .modal-dialog {
-      width: 50vw;
-    }
     .badge {
       margin: 3px;
     }
@@ -257,9 +250,6 @@
     }
     .isFavourite {
       color: red !important;
-    }
-    .hidden {
-      display: none;
     }
   </style>
 </task-modal>
