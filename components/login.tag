@@ -28,13 +28,9 @@
       e.preventDefault();
       const email = this.refs.email.value;
       const password = this.refs.password.value;
-      // TODO: Remove after finishing
-      route('task-overview', 'Tasky - Taskübersicht');
-      /*
       if (email !== '' && password !== '') {
         route('task-overview', 'Tasky - Taskübersicht');
       }
-      */
     }
 
     register(e) {

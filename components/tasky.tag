@@ -30,7 +30,6 @@
           switchPage("user-settings");
           break;
         default:
-          // TODO: Add error handling in case of invalid page
           switchPage("login");
           break;
       }

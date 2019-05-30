@@ -26,7 +26,6 @@ riot.tag2('tasky', '<div id="content"></div>', '', '', function(opts) {
           switchPage("user-settings");
           break;
         default:
-
           switchPage("login");
           break;
       }

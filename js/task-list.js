@@ -55,8 +55,7 @@ riot.tag2('task-list', '<div class="row"> <div class="col-10 md-form mx-auto"> <
 
     // In case the user wants to complete a task
     this.completeTask = function (task) {
-      // TODO: Uncomment after testing...
-      //task.active = false;
+      task.active = false;
       this.taskRepoUpdateTask(task).then((tasks) => {
         this.tasks = tasks;
         this.update();
