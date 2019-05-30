@@ -1,5 +1,6 @@
 <side-nav>
-  <div class="side-nav">
+  <div class="side-nav text-center">
+    <h1 class="title">Tasky</h1>
     <ul class="navigation-list">
       <li>
         <a href="#/task-overview" id="taskOverview">Taskübersicht</a>
@@ -37,7 +38,7 @@
       const currentLocationUrl = window.location.href;
       let location = currentLocationUrl.split('#').pop();
       if (location) {
-        location = location.replace('/','');
+        location = location.replace('/', '');
         location = location.replace('-', ' ');
         const sanitizedLocation = camelize(location);
         setActiveState(sanitizedLocation);
@@ -46,36 +47,38 @@
   </script>
 
   <style media="screen">
-    .navigation-list {
-      list-style-type: none;
+
+    .title {
+      color: #ee6e73;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+    .side-nav {
       background-color: white;
-      padding: 0;
+      box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
+      padding: 15px 0 0 0;
       margin: 0;
       height: 100%;
-      width: 350px;
-      position: absolute;
-      top: 400px;
+      width: 280px;
+      position: fixed;
+      top: 0;
       left: 0;
+      z-index: 2;
+    }
+    .navigation-list {
+      list-style-type: none;
+      padding: 30px 0 0;
     }
     .navigation-list li {
-      display: block;
-      text-align: center;
-      margin: 15px;
-    }
-    .navigation-list a:hover {
-      color: #E91E63;
+      margin: 15px auto;
     }
     .navigation-list li a {
       color: black;
       width: 100%;
-      text-transform: uppercase;
-      transition: color 0.5s ease;
-      font-size: 1.2rem;
       padding-bottom: 5px;
     }
     .active {
       font-weight: bold;
-      color: #E91E63 !important;
     }
   </style>
 </side-nav>

@@ -1,6 +1,5 @@
 <header>
   <div class="header">
-    <h1>Tasky</h1>
     <!-- Image is from: https://t2.rbxcdn.com/f37dbf676862a314cdb3f98c08460146-->
     <img src="./images/profile-picture.png" class="profile-picture rounded-circle" alt="Profile Picture">
     <p class="user-name">{this.currentUser.name}</p>
@@ -16,8 +15,14 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 400px;
-    border-bottom: 1px solid black;
+    height: 300px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding-left: 350px;
+    z-index: 1;
+    background-color: white;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
   }
   .profile-picture {
     margin: 10px 0;
@@ -28,7 +33,9 @@
     font-weight: bold;
   }
   .user-level {
-    font-size: 2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 1.5rem;
   }
 </style>
 
