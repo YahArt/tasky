@@ -2,7 +2,7 @@
   <header></header>
   <side-nav></side-nav>
   <div class="archievments-container container-fluid">
-    <h1>Work in Progress...</h1>
+    <user-skill-list></user-skill-list>
   </div>
 
   <script type="text/javascript">
