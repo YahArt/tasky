@@ -3,9 +3,9 @@ riot.tag2('login', '<div class="container login"> <div class="card"> <div class=
       e.preventDefault();
       const email = this.refs.email.value;
       const password = this.refs.password.value;
-
-      route('task-overview', 'Tasky - Taskübersicht');
-
+      if (email !== '' && password !== '') {
+        route('task-overview', 'Tasky - Taskübersicht');
+      }
     }.bind(this)
 
     this.register = function(e) {
