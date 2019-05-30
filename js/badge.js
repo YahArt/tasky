@@ -2,7 +2,6 @@ riot.tag2('badge', '<div class="md-form"> <h4 class="text-center">{this.opts.bad
     this.calculatePercentage = function () {
       this.percentage = (100 / this.opts.badge.pointsToComplete) * this.opts.badge.currentPoints;
       if (this.progressElement) {
-        console.log(this.percentage);
         this.progressElement.set(this.percentage);
       }
     }

@@ -11,7 +11,6 @@
     this.calculatePercentage = function () {
       this.percentage = (100 / this.opts.badge.pointsToComplete) * this.opts.badge.currentPoints;
       if (this.progressElement) {
-        console.log(this.percentage);
         this.progressElement.set(this.percentage);
       }
     }

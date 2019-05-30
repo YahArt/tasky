@@ -7,6 +7,9 @@
       <li>
         <a href="#/archievments" id="archievments">Achievments</a>
       </li>
+      <li>
+        <a href="#/userSettings" id="userSettings">Benutzereinstellungen</a>
+      </li>
     </ul>
   </div>
 
@@ -49,7 +52,7 @@
       padding: 0;
       margin: 0;
       height: 100%;
-      min-width: 250px;
+      width: 350px;
       position: absolute;
       top: 400px;
       left: 0;

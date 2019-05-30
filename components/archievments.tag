@@ -10,7 +10,7 @@
 
   <style media="screen">
     .archievments-container {
-      padding-left: 250px;
+      padding-left: 350px;
     }
   </style>
 </archievments>
