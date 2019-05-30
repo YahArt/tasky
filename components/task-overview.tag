@@ -13,8 +13,8 @@
   </style>
 
   <script type="text/javascript">
-    this.completedTaskWithPoints = function(points) {
-      this.refs.header.trigger('completedTaskWithPoints', points);
+    this.completeTask = function(task) {
+      this.refs.header.trigger('completeTask', task);
     }
   </script>
 

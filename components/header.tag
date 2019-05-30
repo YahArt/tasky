@@ -46,7 +46,6 @@
 
   this.currentUser = defaultUser;
   this.experienceUntilNextLevel = defaultUser.level * 150;
-  this.displayedExperiencePoints = defaultUser.experiencePoints;
   this.percentage = 0;
   this.update();
   this.on('mount', function () {
@@ -60,16 +59,33 @@
   });
 
   // In case the user has reached more points. -> Gets called by taskOverview
-  this.on('completedTaskWithPoints', points => {
-    this.currentUser.experiencePoints = this.currentUser.experiencePoints + points;
-    this.calculateUserLevel();
-    this.calculateExperiencePointsUntilNextLevel();
-    this.calculatePercentage();
-    this.update();
+  this.on('completeTask', task => {
+    this.currentUser.experiencePoints = this.currentUser.experiencePoints + task.points;
+    this.currentUser.scoredPoints = this.currentUser.scoredPoints + task.points;
+    // For each badge in the given skills which are active add points
+    const activeSkills = task.skills.filter(s => s.active);
+    activeSkills.forEach(activeSkill => {
+      const foundIndex = this.currentUser.skills.findIndex(userSkill => userSkill.name === activeSkill.name);
+      if (foundIndex >= 0) {
+        this.currentUser.skills[foundIndex].badges.filter(b => !b.completed).forEach(badge => {
+          badge.currentPoints = badge.currentPoints + task.points;
+          if (badge.currentPoints >= badge.pointsToComplete) {
+            badge.completed = true;
+          }
+        });
+      }
+    });
 
+    // Update the user
+    this.userRepoUpdateUser(this.currentUser).then(users => {
+      this.currentUser = users[0];
+      this.calculateUserLevel();
+      this.calculateExperiencePointsUntilNextLevel();
+      this.calculatePercentage();
+      this.update();
+    });
   });
 
-  // TODO: Fix this stuff...
   this.calculateExperiencePointsUntilNextLevel = function () {
     this.experienceUntilNextLevel = this.currentUser.level * 70;
   }

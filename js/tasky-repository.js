@@ -1,8 +1,34 @@
+const getDefaultBadgesForSkill = function(skillName) {
+  return [{
+      name: `Anfänger der ${skillName}`,
+      pointsToComplete: 100,
+      currentPoints: 0,
+      completed: false
+    },
+
+    {
+      name: `Novize der ${skillName}`,
+      pointsToComplete: 300,
+      currentPoints: 0,
+      completed: false
+    },
+
+    {
+      name: `Meister der ${skillName}`,
+      pointsToComplete: 3000,
+      currentPoints: 0,
+      completed: false
+    }
+  ];
+};
+
 let TaskyRepository = {
 
   taskyRepoOpenAndInitialize: function() {
     return idb.openDB('tasky-db', 1, {
       upgrade(db, oldVersion, newVersion, transaction) {
+
+        // Setup task storage
         if (!db.objectStoreNames.contains('tasks')) {
           var tasksOs = db.createObjectStore('tasks', {
             keyPath: 'id',
@@ -10,6 +36,7 @@ let TaskyRepository = {
           });
         }
 
+        // Setup user storage
         if (!db.objectStoreNames.contains('users')) {
           var usersOS = db.createObjectStore('users', {
             keyPath: 'id',
@@ -20,8 +47,40 @@ let TaskyRepository = {
             name: 'Pusheen The Cat',
             level: 1,
             experiencePoints: 50,
-            skills: [
-              'Skill 1', 'Skill 2', 'Skill 3'
+            scoredPoints: 0,
+            skills: [{
+                name: 'Effizienz',
+                badges: getDefaultBadgesForSkill('Effizienz')
+              },
+              {
+                name: 'Teamfähigkeit',
+                badges: getDefaultBadgesForSkill('Teamfähigkeit')
+              },
+              {
+                name: 'Schnelligkeit',
+                badges: getDefaultBadgesForSkill('Schnelligkeit')
+              },
+              {
+                name: 'Kommunikation',
+                badges: getDefaultBadgesForSkill('Kommunikation')
+              },
+              {
+                name: 'Kreativität',
+                badges: getDefaultBadgesForSkill('Kreativität')
+              },
+              {
+                name: 'Organisation',
+                badges: getDefaultBadgesForSkill('Organisation')
+              },
+              {
+                name: 'Soziale Kompetenz',
+                badges: getDefaultBadgesForSkill('Soziale Kompetenz')
+              },
+              {
+                name: 'Problemlösung',
+                badges: getDefaultBadgesForSkill('Problemlösung')
+              },
+
             ]
           };
           usersOS.add(dummyUser);
@@ -124,7 +183,7 @@ let TaskyRepository = {
           // No Date entered just search other properties
           else {
             // Allow filtering by name, description, skills or tags
-            if (task.name.toLowerCase().includes(filterValue.toLowerCase()) || task.description.toLowerCase().includes(filterValue.toLowerCase()) || task.skills.some(s => s.toLowerCase().includes(filterValue.toLowerCase())) || task.tags.some(t => t.toLowerCase().includes(filterValue.toLowerCase()))) {
+            if (task.name.toLowerCase().includes(filterValue.toLowerCase()) || task.description.toLowerCase().includes(filterValue.toLowerCase()) || task.skills.some(s => s.name.toLowerCase().includes(filterValue.toLowerCase())) || task.tags.some(t => t.toLowerCase().includes(filterValue.toLowerCase()))) {
               results.push(task);
             }
           }

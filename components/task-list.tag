@@ -84,7 +84,7 @@
       this.taskRepoUpdateTask(task).then((tasks) => {
         this.tasks = tasks;
         this.update();
-        this.parent.completedTaskWithPoints(task.points);
+        this.parent.completeTask(task);
         this.refs.completeTaskModal.open(task);
       });
     }
