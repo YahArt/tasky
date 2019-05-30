@@ -10,8 +10,8 @@
     "watch": "concurrently --kill-others \"riot --config riot.config.js\" \"browser-sync start --config bs-config.js\"",
     "start": "npm run build-all-libs & npm run watch",
     "clear-publish": "rm -rf ./publish",
-    "create-publish-structure": "mkdir publish publish\\js publish\\css publish\\font",
-    "copy-to-publish": "cp -r ./js ./publish && cp -r ./css ./publish && cp -r ./font ./publish && cp ./index.html ./publish",
+    "create-publish-structure": "mkdir publish publish\\js publish\\css publish\\font publish\\images publish\\webfonts",
+    "copy-to-publish": "cp -r ./js ./publish && cp -r ./css ./publish && cp -r ./font ./publish && cp -r ./webfonts ./publish && cp -r ./images ./publish && cp ./index.html ./publish",
     "publish": "npm run clear-publish && npm run create-publish-structure && npm run copy-to-publish"
   },
   "repository": {
