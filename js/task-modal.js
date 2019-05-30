@@ -65,10 +65,35 @@ riot.tag2('task-modal', '<div class="modal fade" id="taskModal" tabindex="-1" ro
     };
 
     this.openWithTask = (task) => {
-      this.editMode = true;
-      this.task = task;
-      this.updateModalInputFields();
-      $('#taskModal').modal('show')
+      this.userRepoGetAllUsers().then((users) => {
+        this.editMode = true;
+        this.task = task;
+
+        const skillsToRemove = [];
+        this.task.skills.forEach((s, index) => {
+          const indexFound = users[0].skills.findIndex(t => t.name === s.name);
+          if (indexFound < 0) {
+            skillsToRemove.push(this.task.skills[index]);
+          }
+        });
+
+        skillsToRemove.forEach(skillToRemove => {
+          const indexFound = this.task.skills.findIndex(s => s.name === skillToRemove.name);
+          if (indexFound >= 0) {
+            this.task.skills.splice(indexFound, 1);
+          }
+        });
+
+        users[0].skills.forEach(s => {
+          const indexFound = this.task.skills.findIndex(t => t.name === s.name);
+
+          if (indexFound < 0) {
+            this.task.skills.push({name: s.name, active: false});
+          }
+        });
+        this.updateModalInputFields();
+        $('#taskModal').modal('show')
+      });
     };
 
     this.clearTaskPriorities = () => {

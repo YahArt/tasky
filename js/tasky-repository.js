@@ -24,6 +24,10 @@ const getDefaultBadgesForSkill = function(skillName) {
 
 let TaskyRepository = {
 
+  taskyRepoGetDefaultBadgesForSkill: function(skillName) {
+    return getDefaultBadgesForSkill(skillName);
+  },
+
   taskyRepoOpenAndInitialize: function() {
     return idb.openDB('tasky-db', 1, {
       upgrade(db, oldVersion, newVersion, transaction) {

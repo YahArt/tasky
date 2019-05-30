@@ -153,10 +153,36 @@
     };
 
     this.openWithTask = (task) => {
-      this.editMode = true;
-      this.task = task;
-      this.updateModalInputFields();
-      $('#taskModal').modal('show')
+      this.userRepoGetAllUsers().then((users) => {
+        this.editMode = true;
+        this.task = task;
+
+        // First we check if the user has removed any skills if so we remove them here to
+        const skillsToRemove = [];
+        this.task.skills.forEach((s, index) => {
+          const indexFound = users[0].skills.findIndex(t => t.name === s.name);
+          if (indexFound < 0) {
+            skillsToRemove.push(this.task.skills[index]);
+          }
+        });
+
+        skillsToRemove.forEach(skillToRemove => {
+          const indexFound = this.task.skills.findIndex(s => s.name === skillToRemove.name);
+          if (indexFound >= 0) {
+            this.task.skills.splice(indexFound, 1);
+          }
+        });
+
+        users[0].skills.forEach(s => {
+          const indexFound = this.task.skills.findIndex(t => t.name === s.name);
+          // Skills which are not already present in tasks.skills are new ones the user has created in that case just add them with active: false
+          if (indexFound < 0) {
+            this.task.skills.push({name: s.name, active: false});
+          }
+        });
+        this.updateModalInputFields();
+        $('#taskModal').modal('show')
+      });
     };
 
     this.clearTaskPriorities = () => {

@@ -26,6 +26,9 @@
         case "register":
           switchPage("register");
           break;
+        case "userSettings":
+          switchPage("user-settings");
+          break;
         default:
           // TODO: Add error handling in case of invalid page
           switchPage("login");

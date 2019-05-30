@@ -5,7 +5,7 @@
     <img src="./images/profile-picture.png" class="profile-picture rounded-circle" alt="Profile Picture">
     <p class="user-name">{this.currentUser.name}</p>
     <p class="user-level">Level {this.currentUser.level}</p>
-    <div id="levelProgress" class="ldBar label-center" data-value="{this.percentage}" data-stroke="data:ldbar/res,stripe(#ff9,#fc9,1)" style="width:30%;height:40;margin:auto"></div>
+    <div id="levelProgress" class="ldBar label-center" data-value="{this.percentage}" data-stroke="data:ldbar/res,stripe(#ff9,#fc9,1)" style="width:30%;height:40;margin:auto" data-aspect-ratio="none"></div>
   </div>
 
 </div>
@@ -24,11 +24,9 @@
     width: 150px;
     height: auto;
   }
-
   .user-name {
     font-weight: bold;
   }
-
   .user-level {
     font-size: 2rem;
   }
@@ -49,7 +47,7 @@
   this.percentage = 0;
   this.update();
   this.on('mount', function () {
-      this.progressElement = new ldBar('#levelProgress');
+    this.progressElement = new ldBar('#levelProgress');
     this.userRepoGetAllUsers().then((users) => {
       this.currentUser = users[0];
       this.calculateExperiencePointsUntilNextLevel();
@@ -89,6 +87,13 @@
   this.calculateExperiencePointsUntilNextLevel = function () {
     this.experienceUntilNextLevel = this.currentUser.level * 70;
   }
+
+  this.on('userSettingsChanged', user => {
+    this.currentUser = user;
+    this.calculateExperiencePointsUntilNextLevel();
+    this.calculatePercentage();
+    this.update();
+  });
 
   this.calculateUserLevel = function () {
     if (this.currentUser.experiencePoints >= this.experienceUntilNextLevel) {
