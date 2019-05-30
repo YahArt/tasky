@@ -9,7 +9,7 @@
 
   <script>
     this.calculatePercentage = function () {
-      this.percentage = (100 / this.opts.badge.pointsToComplete) * this.opts.badge.currentPoints;
+      this.percentage = Math.floor((100 / this.opts.badge.pointsToComplete) * this.opts.badge.currentPoints);
       if (this.progressElement) {
         this.progressElement.set(this.percentage);
       }
