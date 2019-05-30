@@ -3,11 +3,10 @@
   <side-nav></side-nav>
 
   <div class="container user-settings">
-
-    <h1 class="upper-case">Ihre Benutzereinstellungen</h1>
-
     <div class="row mt-3">
       <div class="col-12">
+        <h4>Ihre Benutzereinstellungen</h4>
+
         <div class="md-form">
           <input ref="userName" type="text" class="form-control" id="userName">
           <label for="userName">Benutzername</label>
@@ -42,8 +41,8 @@
 
 <style media="screen">
   .user-settings {
-    padding-top: 50px;
-    padding-left: 350px;
+    padding-top: 300px;
+    padding-left: 280px;
   }
   .skill {
     margin: 5px;

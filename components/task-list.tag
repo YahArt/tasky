@@ -1,19 +1,16 @@
 <task-list>
   <div class="row">
-    <div class="col-md-9 md-form mt-0">
+    <div class="col-10 md-form mx-auto">
       <input ref="filterValue" class="form-control" type="text" placeholder="Durchsuche deine Tasks" aria-label="Search">
-    </div>
-    <div class="col-md-1">
-      <button onclick="{filterTask}" class="btn btn-primary btn-sm">Filter anwenden</button>
-    </div>
-
-    <div class="col-md-1">
-      <button onclick="{clearFilter}" class="btn btn-primary btn-sm">Filter löschen</button>
+      <div class="filter-settings">
+        <button onclick="{filterTask}" class="btn btn-primary btn-sm">Filter anwenden</button>
+        <button onclick="{clearFilter}" class="btn btn-primary btn-sm">Filter löschen</button>
+      </div>
     </div>
   </div>
 
-  <div class="row">
-    <div each="{task in tasks}" class="col-md-3">
+  <div class="row mt-3">
+    <div each="{task in tasks}" class="col-md-4">
       <task task="{task}"></task>
     </div>
     <add-task-button></add-task-button>
@@ -115,4 +112,15 @@
       });
     });
   </script>
+
+  <style media="screen">
+    .filter-settings {
+      position: absolute;
+      right: 0;
+    }
+
+    .task-list {
+      /*margin-top: 50px;*/
+    }
+  </style>
 </task-list>
