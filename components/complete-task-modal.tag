@@ -10,7 +10,7 @@
         </div>
         <div class="modal-body mx-3 text-center">
           <h4>Sie haben Ihre Fertigkeiten in folgenden Bereichen verbessert</h4>
-          <span class="badge badge-pill badge-default" each="{skill, index in task.skills}">{skill}</span>
+          <span class="badge badge-pill badge-default" each="{skill, index in activeSkills}">{skill.name}</span>
           <br>
           <br>
           <h4>und erhalten hierfür <span class="task-score">{task.points} Punkte</span></h4>
@@ -26,9 +26,7 @@
       isFavourite: false,
       points: 20,
       tags: [],
-      skills: [
-        'Skill 1', 'Skill 2', 'Skill 3'
-      ],
+      skills: [],
       priorities: [
         {
           description: 'Hoch',
@@ -45,10 +43,12 @@
 
     this.on('before-mount', () => {
       this.task = defaultTask;
+      this.activeSkills = [];
     });
 
     this.open = (completedTask) => {
       this.task = completedTask;
+      this.activeSkills = this.task.skills.filter(s => s.active);
       this.update();
       $('#completedTaskModal').modal('show')
 

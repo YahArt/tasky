@@ -60,7 +60,7 @@ riot.tag2('task-list', '<div class="row"> <div class="col-md-9 md-form mt-0"> <i
       this.taskRepoUpdateTask(task).then((tasks) => {
         this.tasks = tasks;
         this.update();
-        this.parent.completedTaskWithPoints(task.points);
+        this.parent.completeTask(task);
         this.refs.completeTaskModal.open(task);
       });
     }

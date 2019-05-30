@@ -53,7 +53,7 @@
             <div class="col-md-4 offset-md-2">
               <div class="md-form">
                 <p>Skills</p>
-                <span class="badge badge-pill badge-default" each="{skill, index in task.skills}">{skill}<i onclick="{removeSkill}" class="fas fa-times ml-2"></i>
+                <span class="{active-skill: skill.active} badge badge-pill badge-default" onclick="{toggleActiveSkill}" each="{skill, index in task.skills}">{skill.name}
                 </span>
               </div>
             </div>
@@ -93,9 +93,7 @@
       points: 20,
       active: true,
       tags: [],
-      skills: [
-        'Skill 1', 'Skill 2', 'Skill 3'
-      ],
+      skills: [],
       priorities: [
         {
           description: 'Hoch',
@@ -146,7 +144,9 @@
       this.userRepoGetAllUsers().then((users) => {
         this.editMode = false;
         this.task = defaultTask;
-        this.task.skills = users[0].skills;
+        this.task.skills = users[0].skills.map(s => {
+          return {name: s.name, active: false}
+        });
         this.updateModalInputFields();
         $('#taskModal').modal('show')
       });
@@ -198,20 +198,23 @@
     }
 
     this.removeTag = (event) => {
+      event.preventDefault();
       const indexToRemove = event.item.index;
       if (indexToRemove >= 0) {
         this.task.tags.splice(indexToRemove, 1);
       }
     };
 
-    this.removeSkill = (event) => {
-      const indexToRemove = event.item.index;
-      if (indexToRemove >= 0) {
-        this.task.skills.splice(indexToRemove, 1);
+    this.toggleActiveSkill = (event) => {
+      event.preventDefault();
+      const indexToSetActive = event.item.index;
+      if (indexToSetActive >= 0) {
+        this.task.skills[indexToSetActive].active = !this.task.skills[indexToSetActive].active;
       }
     };
 
-    this.addTag = function () {
+    this.addTag = function (event) {
+      event.preventDefault();
       const newTag = this.refs.currentTag.value;
       if (newTag !== '') {
         this.task.tags.push(newTag);
@@ -247,6 +250,9 @@
       margin: 3px;
     }
     .priority {
+      background-color: red !important;
+    }
+    .active-skill {
       background-color: red !important;
     }
     .isFavourite {
