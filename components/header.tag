@@ -4,7 +4,7 @@
     <img src="./images/profile-picture.png" class="profile-picture rounded-circle" alt="Profile Picture">
     <p class="user-name">{this.currentUser.name}</p>
     <p class="user-level">Level {this.currentUser.level}</p>
-    <div id="levelProgress" class="ldBar label-center" data-value="{this.percentage}" data-stroke="data:ldbar/res,stripe(#ff9,#fc9,1)" style="width:30%;height:40;margin:auto" data-aspect-ratio="none"></div>
+    <div id="levelProgress" class="ldBar label-center" data-value="{this.percentage}" data-preset="line" style="width:30%;height:40;margin:auto" data-aspect-ratio="none"></div>
   </div>
 
 </div>

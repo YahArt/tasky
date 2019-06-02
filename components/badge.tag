@@ -3,7 +3,7 @@
     <h4 class="text-center">{this.opts.badge.name} ({this.opts.badge.currentPoints} von {this.opts.badge.pointsToComplete} Punkten erreicht)<i show="{this.opts.badge.completed}" class="status completed fas fa-check-circle"></i><i show="{!this.opts.badge.completed}" class="status incomplete fas fa-times-circle"></i></h4>
 
     <div class="badge-progres-container">
-      <div id="badgeProgress{this.opts.index}" class="ldBar lBar-label label-center" data-value="{this.percentage}" data-stroke="data:ldbar/res,stripe(#ff9,#fc9,1)" style="width:100%;height:100;margin:auto" data-stroke-width="10" data-aspect-ratio="none"></div>
+      <div id="badgeProgress{this.opts.index}" class="ldBar lBar-label label-center" data-value="{this.percentage}" data-preset="line" style="width:100%;height:100;margin:auto" data-aspect-ratio="none"></div>
     </div>
   </div>
 
