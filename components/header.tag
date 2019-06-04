@@ -2,9 +2,8 @@
   <div class="container-fluid header">
     <div class="row py-3">
       <div class="col-md-3">
-        <!-- Image is from: https://t2.rbxcdn.com/f37dbf676862a314cdb3f98c08460146-->
-
         <div class="text-center">
+          <!-- Image is from: http://fintechsummit.sk/2018/wp-content/uploads/2018/10/icon-02-150x150.png-->
           <img src="./images/profile-picture.png" class="rounded-circle" alt="Profile Picture">
           <p class="user-name">{this.currentUser.name}</p>
           <p class="user-level">Level {this.currentUser.level}</p>

@@ -57,7 +57,7 @@
       min-height: 250px;
     }
     .card-body {
-      background-color: #CDDC39;
+      background-color: #42A5F5;
     }
     .task-action-container {
       position: absolute;

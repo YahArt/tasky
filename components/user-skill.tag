@@ -33,7 +33,7 @@
       min-height: 250px;
     }
     .card-body {
-      background-color: #EC407A;
+      background-color: #5E35B1;
     }
     .card .card-body .card-text {
       color: inherit;
