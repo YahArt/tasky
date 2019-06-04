@@ -1,4 +1,4 @@
-riot.tag2('header', '<div class="header"> <img src="./images/profile-picture.png" class="profile-picture rounded-circle" alt="Profile Picture"> <p class="user-name">{this.currentUser.name}</p> <p class="user-level">Level {this.currentUser.level}</p> <div id="levelProgress" class="ldBar label-center" data-value="{this.percentage}" data-preset="line" style="width:30%;height:40;margin:auto" data-aspect-ratio="none"></div> </div> </div>', 'header .header,[data-is="header"] .header{ display: flex; flex-direction: column; justify-content: center; align-items: center; height: 300px; position: fixed; top: 0; width: 100%; padding-left: 350px; z-index: 1; background-color: white; box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12); } header .profile-picture,[data-is="header"] .profile-picture{ margin: 10px 0; width: 150px; height: auto; } header .user-name,[data-is="header"] .user-name{ font-weight: bold; } header .user-level,[data-is="header"] .user-level{ font-weight: bold; text-transform: uppercase; font-size: 1.5rem; }', '', function(opts) {
+riot.tag2('header', '<div class="container-fluid header"> <div class="row py-3"> <div class="col-md-3"> <div class="text-center"> <img src="./images/profile-picture.png" class="rounded-circle" alt="Profile Picture"> <p class="user-name">{this.currentUser.name}</p> <p class="user-level">Level {this.currentUser.level}</p> <div id="levelProgress" class="ldBar label-center" data-value="{this.percentage}" data-preset="line" style="width:30%;height:40;margin:auto" data-aspect-ratio="none"></div> </div> </div> <div class="col-md-9 my-auto text-center"> <h4 class="current-location">{headerLocation}</h4> </div> </div> </div> </div>', 'header .header,[data-is="header"] .header{ position: fixed; width: 100%; min-height: 300px; z-index: 999; background-color: white; box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12); } header .user-name,[data-is="header"] .user-name{ margin: 15px 0; font-weight: bold; } header .user-level,[data-is="header"] .user-level{ font-weight: bold; text-transform: uppercase; font-size: 1.5rem; } header .current-location,[data-is="header"] .current-location{ font-weight: bold; } header .ldBar-label,[data-is="header"] .ldBar-label{ margin: 10px 0; }', '', function(opts) {
   // Require tasky repository
   this.mixin('TaskyRepository');
   const defaultUser = {
@@ -7,6 +7,8 @@ riot.tag2('header', '<div class="header"> <img src="./images/profile-picture.png
     experiencePoints: 50,
     skills: []
   };
+
+  this.headerLocation = "";
 
   this.currentUser = defaultUser;
   this.experienceUntilNextLevel = defaultUser.level * 150;
@@ -75,4 +77,38 @@ riot.tag2('header', '<div class="header"> <img src="./images/profile-picture.png
       this.progressElement.set(this.percentage);
     }
   }
+
+  this.on('mount', function () {
+    function camelize(str) {
+      return str.replace(/(?:^\w|[A-Z]|\b\w)/g, function (word, index) {
+        return index == 0
+          ? word.toLowerCase()
+          : word.toUpperCase();
+      }).replace(/\s+/g, '');
+    }
+
+    function getHeaderLocation(locationIdentifier) {
+      switch (locationIdentifier) {
+        case "taskOverview":
+          return "Taskübersicht";
+        case "archievments":
+          return "Achievments";
+        case "userSettings":
+          return "Benutzereinstellungen";
+        default:
+          return "";
+
+      }
+    }
+
+    // Set active state according to current location
+    const currentLocationUrl = window.location.href;
+    let location = currentLocationUrl.split('#').pop();
+    if (location) {
+      location = location.replace('/', '');
+      location = location.replace('-', ' ');
+      const sanitizedLocation = camelize(location);
+      this.headerLocation = getHeaderLocation(sanitizedLocation);
+    }
+  });
 });

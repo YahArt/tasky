@@ -10,8 +10,18 @@
 
   <style media="screen">
     .archievments-container {
-      padding-top: 300px;
-      padding-left: 280px;
+      padding-top: 400px;
+    }
+
+    @media (min-width: 0em) {
+      .archievments-container {
+        padding-left: 6em;
+      }
+    }
+    @media (min-width: 68em) {
+      .archievments-container {
+        padding-left: 15em;
+      }
     }
   </style>
 </archievments>

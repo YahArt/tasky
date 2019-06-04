@@ -1,18 +1,25 @@
 <side-nav>
-  <div class="side-nav text-center">
-    <h1 class="title">Tasky</h1>
-    <ul class="navigation-list">
-      <li>
-        <a href="#/task-overview" id="taskOverview">Taskübersicht</a>
-      </li>
-      <li>
-        <a href="#/archievments" id="archievments">Achievments</a>
-      </li>
-      <li>
-        <a href="#/userSettings" id="userSettings">Benutzereinstellungen</a>
-      </li>
-    </ul>
-  </div>
+  <div class="s-layout__sidebar">
+  <nav class="s-sidebar__nav">
+     <ul>
+        <li>
+           <a class="s-sidebar__nav-link" href="#/task-overview" id="taskOverview">
+              <i class="fas fa-th-list"></i><p>Taskübersicht</p>
+           </a>
+        </li>
+        <li>
+           <a class="s-sidebar__nav-link" href="#/archievments" id="archievments">
+             <i class="fas fa-trophy"></i><p>Achievments</p>
+           </a>
+        </li>
+        <li>
+           <a class="s-sidebar__nav-link" href="#/userSettings" id="userSettings">
+              <i class="fas fa-user"></i><p>Benutzereinstellungen</p>
+           </a>
+        </li>
+     </ul>
+  </nav>
+</div>
 
   <script type="text/javascript">
     this.on('mount', function () {
@@ -48,37 +55,108 @@
 
   <style media="screen">
 
-    .title {
-      color: #ee6e73;
-      text-transform: uppercase;
-      font-weight: bold;
-    }
-    .side-nav {
-      background-color: white;
-      box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
-      padding: 15px 0 0 0;
-      margin: 0;
-      height: 100%;
-      width: 280px;
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: 2;
-    }
-    .navigation-list {
-      list-style-type: none;
-      padding: 30px 0 0;
-    }
-    .navigation-list li {
-      margin: 15px auto;
-    }
-    .navigation-list li a {
-      color: black;
-      width: 100%;
-      padding-bottom: 5px;
-    }
-    .active {
-      font-weight: bold;
-    }
+  .active {
+    font-weight: bold;
+  }
+
+  /* Sidebar  inspired from: https://github.com/BlackrockDigital/startbootstrap-simple-sidebar */
+  .s-sidebar__nav {
+     position: fixed;
+     top: 300; /* Respect header height */
+     left: -15em;
+     overflow: hidden;
+     transition: all .3s ease-in;
+     width: 15em;
+     height: 100%;
+     background-color: white;
+     z-index: 998;
+     box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
+  }
+
+
+  .s-sidebar__nav:hover,
+  .s-sidebar__nav:focus {
+  }
+
+  .s-sidebar__nav:hover,
+  .s-sidebar__nav:focus {
+     left: 0;
+     width: 15em;
+  }
+
+  .s-sidebar__nav ul {
+     position: absolute;
+     top: 4em;
+     left: 0;
+     margin: 0;
+     padding: 0;
+     width: 15em;
+  }
+
+  .s-sidebar__nav ul li {
+     width: 100%;
+  }
+
+  .s-sidebar__nav ul li a {
+     color: inherit;
+  }
+
+  .s-sidebar__nav-link {
+     position: relative;
+     display: inline-block;
+     width: 100%;
+     height: 4em;
+  }
+
+  .s-sidebar__nav-link p {
+     position: absolute;
+     top: 50%;
+     left: 4em;
+     transform: translateY(-50%);
+  }
+
+
+  .s-sidebar__nav-link > i {
+     position: absolute;
+     top: 0;
+     left: 0;
+     display: inline-block;
+     width: 4em;
+     height: 4em;
+  }
+
+  .s-sidebar__nav-link > i::before {
+     position: absolute;
+     top: 50%;
+     left: 50%;
+     transform: translate(-50%, -50%);
+  }
+
+  /* Mobile First */
+  @media (min-width: 0em) {
+     /* Sidebar */
+
+     .s-sidebar__nav {
+        width: 4em;
+        left: 0;
+     }
+
+     .s-sidebar__nav:hover,
+     .s-sidebar__nav:focus {
+        width: 15em;
+     }
+  }
+
+  @media (min-width: 68em) {
+     /* Sidebar */
+
+     .s-sidebar__nav {
+        width: 15em;
+     }
+
+     .s-sidebar__nav ul {
+        top: 1.3em;
+     }
+  }
   </style>
 </side-nav>

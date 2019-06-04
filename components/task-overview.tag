@@ -7,13 +7,22 @@
 
   <style media="screen">
     .task-overview-container {
-      padding-top: 300px;
-      padding-left: 280px;
+      padding-top: 400px;
+    }
+    @media (min-width: 0em) {
+      .task-overview-container {
+        padding-left: 6em;
+      }
+    }
+    @media (min-width: 68em) {
+      .task-overview-container {
+        padding-left: 15em;
+      }
     }
   </style>
 
   <script type="text/javascript">
-    this.completeTask = function(task) {
+    this.completeTask = function (task) {
       this.refs.header.trigger('completeTask', task);
     }
   </script>
