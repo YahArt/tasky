@@ -26,11 +26,11 @@
       height: 60px;
       bottom: 120px;
       right: 40px;
-      background-color: #0C9;
+      background-color: #3949AB;
       color: #FFF;
       border-radius: 50px;
       text-align: center;
-      box-shadow: 2px 2px 3px #999;
+      box-shadow: 2px 2px 3px #3949AB;
     }
     .my-float {
       margin-top: 22px;
